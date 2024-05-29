@@ -45,7 +45,11 @@ export class PrismaAdapter<_PrismaClient extends PrismaClient> implements Adapte
 				id: sessionId
 			},
 			include: {
-				[userModelKey]: true
+				[userModelKey]: {
+		          include: {
+		            role: true, // Ensure the role is included correctly
+		          },
+		        },
 			}
 		});
 		if (!result) return [null, null];
